@@ -17,17 +17,58 @@ public class QuickSort {
             numbers[i]=s.nextInt();
         }
 
+        toSort(numbers,0,numbers.length-1);
+
+        for (int number : numbers) {
+            System.out.print(number);
+            System.out.print(",");
+        }
+        System.out.println();
     }
     private void toSort(int[] numbers,int in,int to)
     {
-        int flag =(to+in)/2;
-        int c;
-        int flagNum=numbers[flag];
-        if(numbers[0]>flagNum)numbers[flag]=numbers[0];
-        for (int i=in,j=to;i<=j;)
+        if (in!=to)
         {
-
+            int flag =(to+in)/2;
+            int flagNum=numbers[flag];
+            numbers[flag]=numbers[in];
+            boolean f=true;
+            for (int i=in,j=to;i<=j;)
+            {
+                if (i==j)
+                {
+                    numbers[i]=flagNum;
+                    if(i-1>=0){
+                        toSort(numbers,0,i-1);
+                    }
+                    if(i+1<=to)
+                    {
+                        toSort(numbers,i+1,to);
+                    }
+                    break;
+                }
+                if(f)
+                {
+                    if (numbers[j]<flagNum)
+                    {
+                        numbers[i]=numbers[j];
+                        i++;
+                        f=false;
+                    }
+                    else j--;
+                }
+                else {
+                    if (numbers[i]>flagNum)
+                    {
+                        numbers[j]=numbers[i];
+                        j--;
+                        f=true;
+                    }
+                    else i++;
+                }
+            }
         }
+
     }
 
 }
